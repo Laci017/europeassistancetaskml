@@ -2,23 +2,37 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
+    <a href="{{ route('task.create') }}" role="button" class="btn btn-primary">Új feladat rögzítése</a>
+    <table class="table">
+        <thead>
+            <th>Feladat megnevezése</th>
+            <th>Prioritás</th>
+            <th>Státusz</th>
+            <th>Határidő</th>
+            <th>Felelős</th>
+            <th>Szerkesztés</th>
+        </thead>
+        <tbody>
+            @foreach($tasks as $t)
+             <tr>
+                <td>{{ $t->name }}</td>
+                <td>{{ $t->priority->name }}</td>
+                <td>{{ $t->status->name }}</td>
+                <td>{{ $t->deadline }}</td>
+                 <td>
+                     @if(!$t->responsible->count())
+                         Nincs megadva felelős.
+                     @else
+                         @foreach($t->responsible as $r)
+                             {{ $r->user->name }}
+                         @endforeach
+                     @endif
+                 </td>
+                 <td><i class="fa-solid fa-pen-to-square"></i></td>
+             </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 <main-component></main-component>
 @endsection

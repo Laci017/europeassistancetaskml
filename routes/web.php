@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('task')->group(function (){
+    Route::get('/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
+    Route::post('/store', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+});
