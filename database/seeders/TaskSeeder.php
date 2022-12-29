@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class TaskSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('tasks')->truncate();
         DB::table('tasks')->insert(
             [
@@ -27,5 +29,6 @@ class TaskSeeder extends Seeder
                 ['id' => 8, 'name' => 'DB terv', 'description' => 'Induló project DB tervezése', 'priority_id' => 1, 'status_id' => 1, 'created_by' => 1, 'deadline' => '2022-10-26 12:00'],
             ]
         );
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class StatusSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('statuses')->truncate();
         DB::table('statuses')->insert(
             [
@@ -23,5 +25,6 @@ class StatusSeeder extends Seeder
                 ['id' => 4, 'name' => 'Tesztelhető'],
                 ['id' => 5, 'name' => 'Kész']
             ]);
+        Schema::enableForeignKeyConstraints();
     }
 }

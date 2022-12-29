@@ -17,11 +17,11 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('priority_id')->unsigned();
-            $table->integer('status_id')->unsigned()->default(1);
+            $table->unsignedBigInteger('priority_id')->nullable();
+            $table->unsignedBigInteger('status_id')->nullable()->default(1);
             $table->dateTime('deadline');
-            $table->integer('created_by')->unsigned()->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->boolean('is_multi_resp')->default(0);
             $table->timestamps();
         });

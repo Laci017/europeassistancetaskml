@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class PrioritySeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class PrioritySeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('priorities')->truncate();
         DB::table('priorities')->insert(
         [
@@ -21,5 +23,6 @@ class PrioritySeeder extends Seeder
            ['id' => 2, 'name' => 'Sürgős', 'description' => 'Sürgős prioritás', 'color' => 'yellow'],
            ['id' => 3, 'name' => 'Kritikus', 'description' => 'Kritikus prioritás', 'color' => 'red'],
         ]);
+        Schema::enableForeignKeyConstraints();
     }
 }

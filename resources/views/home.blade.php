@@ -12,6 +12,7 @@
             <th>Állapot</th>
             <th>Feladathoz rendelt személy(ek)</th>
             <th>Feladatot létrehozta</th>
+            <th>Többszemélyes?</th>
             <th>Szerkesztés</th>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                      @endif
                  </td>
                  <td>{{ $t->creator->name }}</td>
+                 <td>{{ $t->is_multi_resp ? 'Igen' : 'Nem' }}</td>
                  <td><a href="{{ route('task.update', [$t->getKey()]) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
              </tr>
             @endforeach

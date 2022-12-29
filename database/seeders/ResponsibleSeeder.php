@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ResponsibleSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class ResponsibleSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('responsibles')->truncate();
         DB::table('responsibles')->insert(
             [
@@ -23,5 +25,6 @@ class ResponsibleSeeder extends Seeder
                 ['task_id' => 4, 'user_id' => 3],
                 ['task_id' => 5, 'user_id' => 2]
             ]);
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -15,8 +15,8 @@ class CreateResponsiblesTable extends Migration
     {
         Schema::create('responsibles', function (Blueprint $table) {
             $table->id();
-            $table->integer('task_id')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->unsignedBigInteger('task_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
         });
     }
 
