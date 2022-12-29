@@ -15,4 +15,3 @@ g.	Feladat létrehozója (felhasználó)
 6.	Legyen lehetőség feladatot felhasználóhoz rendelni. A feladat hozzárendelés után mentődjön adatbázisba, hogy melyik felhasználó melyik feladathoz lett hozzárendelve.
 7.	A front end design-ra nem kötelező hangsúlyt fektetni, de használhatsz bármilyen keretrendszert / library-t.
 8.	Töltsd fel az alkalmazást github-ra és küldj rövid telepítési útmutatót.
-9.	A repo-t tedd publikussá és jelezz a következő e-mail címeken: timea.cseman@europ-assistance.hu, csaba.keresztury@europ-assistance.hu, zoltan.udvardi@europ-assistance.hu
