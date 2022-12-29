@@ -24,6 +24,10 @@ class Task extends Model
     protected $table = 'tasks';
     public $timestamps = true;
 
+    protected $fillable = [
+        'status_id'
+    ];
+
     public function status()
     {
         return $this->hasOne('App\Models\Status', 'id', 'status_id');

@@ -21,7 +21,7 @@
                 <td>{{ $t->name }}</td>
                 <td>{{ $t->deadline }}</td>
                 <td>{{ $t->description }}</td>
-                <td>{{ $t->priority->name }}</td>
+                <td class="{{ $t->priority->color }}">{{ $t->priority->name }}</td>
                 <td>{{ $t->status->name }}</td>
                  <td>
                      @if(!$t->responsible->count())

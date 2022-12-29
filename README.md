@@ -15,3 +15,13 @@ g.	Feladat létrehozója (felhasználó)
 6.	Legyen lehetőség feladatot felhasználóhoz rendelni. A feladat hozzárendelés után mentődjön adatbázisba, hogy melyik felhasználó melyik feladathoz lett hozzárendelve.
 7.	A front end design-ra nem kötelező hangsúlyt fektetni, de használhatsz bármilyen keretrendszert / library-t.
 8.	Töltsd fel az alkalmazást github-ra és küldj rövid telepítési útmutatót.
+
+Telepítési útmutató: 
+
+InnoDB adatbázis létrehozása: europe_assistance_db
+.env környezeti beállítások ellenőrzése
+composer install
+php artisan migrate
+php artisan db:seed
+npm install
+npm run watch

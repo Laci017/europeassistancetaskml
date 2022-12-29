@@ -6,8 +6,8 @@
         <div class="card col-md-6">
             <div class="card-header">@if(isset($model)) {{ $model->getKey() }}. számú feladat szerkesztése @else Új feladat rögzítése @endif</div>
             <div class="card-body">
-                {!! simpleFormInput('name', 'Feladat megnevezése', $model->name ?? null) !!}
-                {!! simpleFormInput('description', 'Feladat leírása', $model->description ?? null) !!}
+                {!! simpleFormInput('name', 'Feladat megnevezése *', $model->name ?? null) !!}
+                {!! simpleFormInput('description', 'Feladat leírása *', $model->description ?? null) !!}
                 {!! html_select('priority_id', $data->priorities, $model->priority_id ?? -1, $errors, 'Prioritás') !!}
                 {!! html_select('status_id', $data->statuses, $model->status_id ?? -1, $errors, 'Státusz') !!}
                 <div class="form-check">
@@ -16,7 +16,11 @@
                 </div>
                 <div class="form-group col-md-8">
                     <div class="form_item">
-                <label for="deadline">Határidő:</label>
+                <label for="deadline">Határidő:
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="A mező kitöltése nem kötelező, amennyiben nincs megadva: 7 nap alapértelmezett határidőt állítunk be."
+                    ><i class="fa-sharp fa-solid fa-circle-info"></i></span>
+                </label>
                 <input type="datetime-local" id="deadline" name="deadline" class="form-control form-control-lg" value="{{ $model->deadline ?? null }}">
                     </div>
                 </div>

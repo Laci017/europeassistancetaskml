@@ -9,7 +9,6 @@ use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -62,8 +61,8 @@ class TaskController extends Controller
         $task->updated_by = Auth::user()->id;
         $task->save();
         /** Save responsible users if any **/
+        Responsible::where('task_id', $task->getKey())->delete();
         if($request->user_id){
-            Responsible::where('task_id', $task->getKey())->delete();
             foreach ($request->user_id as $user)
             {
                $resp = new Responsible();

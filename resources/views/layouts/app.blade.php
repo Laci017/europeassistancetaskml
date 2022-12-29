@@ -27,6 +27,18 @@
         .select2-selection {
             height: 36px !important;
         }
+        .green {
+            color: mediumseagreen;
+            font-style: italic;
+        }
+        .yellow {
+            color: darkorange;
+            font-weight: bold;
+        }
+        .red {
+            color: salmon;
+            font-weight: bolder;
+        }
     </style>
 </head>
 <body>
