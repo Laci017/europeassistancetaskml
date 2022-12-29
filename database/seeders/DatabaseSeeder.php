@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             PrioritySeeder::class,
             StatusSeeder::class,
             TaskSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            ResponsibleSeeder::class
             ]);
     }
 }

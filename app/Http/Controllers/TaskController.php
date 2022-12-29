@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Priority;
+use App\Models\Responsible;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
@@ -35,19 +36,40 @@ class TaskController extends Controller
         return view('task.create')->with('data', $this->data);
     }
 
+    public function update(Task $task)
+    {
+        $this->model = $task;
+        $this->data->statuses = Status::get();
+        $this->data->priorities = Priority::get();
+        $this->data->users = User::get();
+        if($this->model->responsible) $this->model->responsible_array = $this->model->responsible()->pluck('user_id')->toArray();
+        return view('task.update')->with('model', $this->model)->with('data', $this->data);
+    }
+
     public function store(StoreTaskRequest $request, Task $task = null)
     {
-        /** ide kell majd store method **/
         if(!$task){
             $task = new Task();
             $task->created_by = Auth::user()->id;
         }
-        $task->name = $request->name ?? null;
+        $task->name = $request->name;
         $task->status_id = $request->status_id;
-        $task->priority_id = $request->priority_id ?? null;
-        $task->description = $request->description ?? null;
+        $task->priority_id = $request->priority_id;
+        $task->description = $request->description;
+        $task->is_multi_resp = $request->has('is_multi_resp');
         $task->deadline = $request->deadline ?? Carbon::now()->addDays(7)->format('Y-m-d H:i');
+        $task->updated_by = Auth::user()->id;
         $task->save();
+        if($request->user_id){
+            Responsible::where('task_id', $task->getKey())->delete();
+            foreach ($request->user_id as $user)
+            {
+               $resp = new Responsible();
+               $resp->user_id = $user;
+               $resp->task_id = $task->getKey();
+               $resp->save();
+            }
+        }
         return redirect()->route('home');
     }
 }

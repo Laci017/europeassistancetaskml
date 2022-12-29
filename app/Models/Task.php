@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property dateTime $deadline
  * @property int $created_by
  * @property int $updated_by
+ * @property boolean $is_multi_resp
  *
  */
 class Task extends Model

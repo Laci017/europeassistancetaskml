@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('task.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('task.store', ['task' => $model->id ?? null]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card col-md-6">
             <div class="card-header">Új feladat rögzítése</div>
@@ -17,9 +17,10 @@
                 <div class="form-group col-md-8">
                     <div class="form_item">
                 <label for="deadline">Határidő:</label>
-                <input type="datetime-local" id="deadline" name="deadline" class="form-control form-control-lg">
+                <input type="datetime-local" id="deadline" name="deadline" class="form-control form-control-lg" value="{{ $model->deadline ?? null }}">
                     </div>
                 </div>
+                {!! html_select('user_id', $data->users, $model->responsible_array ?? null, $errors, 'Felelős', true) !!}
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -36,4 +37,50 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            /*
+            $("#user_id").select2({
+                maximumSelectionLength: 5,
+                allowClear: true,
+                width: 'resolve',
+                language: {
+                    maximumSelected: function (e) {
+                        let t = "Legfeljebb " + e.maximum + " kollégát jelölhetsz meg.";
+                        e.maximum != 1 && (t += "");
+                        return t;
+                    }
+                }
+            });
+            */
+        function initializeSelect() {
+            let val = 1;
+            if($('#is_multi_resp').is(":checked")){
+                val = 5;
+            }
+            $("#user_id").select2({
+                maximumSelectionLength: val,
+                allowClear: true,
+                width: 'resolve',
+                language: {
+                    maximumSelected: function (e) {
+                        let t = "Legfeljebb " + e.maximum + " kollégát jelölhetsz meg.";
+                        e.maximum != 1 && (t += "");
+                        return t;
+                    }
+                }
+            });
+        }
+        initializeSelect();
+            $('#is_multi_resp').change(function () {
+                $("#user_id").val('').trigger('change');
+                initializeSelect();
+                console.log('megváltozott a helyzet');
+            });
+        });
+
+    </script>
 @endsection

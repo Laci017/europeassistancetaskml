@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+window.select2 = require('select2');
 
 /**
  * The following block of code may be used to automatically register your

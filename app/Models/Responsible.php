@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  *
  * @property integer $task_id
- * @property integer $responsible_id
+ * @property integer $user_id
  *
  */
 class Responsible extends Model
@@ -30,6 +30,6 @@ class Responsible extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'responsible_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

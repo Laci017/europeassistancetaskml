@@ -6,19 +6,22 @@
     <table class="table">
         <thead>
             <th>Feladat megnevezése</th>
-            <th>Prioritás</th>
-            <th>Státusz</th>
             <th>Határidő</th>
-            <th>Felelős</th>
+            <th>Leírás</th>
+            <th>Prioritás</th>
+            <th>Állapot</th>
+            <th>Feladathoz rendelt személy(ek)</th>
+            <th>Feladatot létrehozta</th>
             <th>Szerkesztés</th>
         </thead>
         <tbody>
             @foreach($tasks as $t)
              <tr>
                 <td>{{ $t->name }}</td>
+                <td>{{ $t->deadline }}</td>
+                <td>{{ $t->description }}</td>
                 <td>{{ $t->priority->name }}</td>
                 <td>{{ $t->status->name }}</td>
-                <td>{{ $t->deadline }}</td>
                  <td>
                      @if(!$t->responsible->count())
                          Nincs megadva felelős.
@@ -28,7 +31,8 @@
                          @endforeach
                      @endif
                  </td>
-                 <td><i class="fa-solid fa-pen-to-square"></i></td>
+                 <td>{{ $t->creator->name }}</td>
+                 <td><a href="{{ route('task.update', [$t->getKey()]) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
              </tr>
             @endforeach
         </tbody>

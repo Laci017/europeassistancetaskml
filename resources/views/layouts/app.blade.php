@@ -18,6 +18,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        /* Make Select2 boxes match Bootstrap3 as well as Bootstrap4 heights: */
+        .select2-selection__rendered {
+            line-height: 34px !important;
+        }
+
+        .select2-selection {
+            height: 36px !important;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -81,5 +91,7 @@
             </div>
         </main>
     </div>
+    <!-- Scripts -->
+    @yield('script')
 </body>
 </html>

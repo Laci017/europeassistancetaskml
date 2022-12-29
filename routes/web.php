@@ -19,5 +19,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::prefix('task')->group(function (){
     Route::get('/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
-    Route::post('/store', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+    Route::get('/update/{task}', [App\Http\Controllers\TaskController::class, 'update'])->name('task.update')->where('task', '\d+');
+    Route::post('/store/{task?}', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store')->where('task', '\d+');;
 });
