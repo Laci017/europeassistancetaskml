@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class TaskController extends Controller
 {
@@ -60,6 +61,7 @@ class TaskController extends Controller
         $task->deadline = $request->deadline ?? Carbon::now()->addDays(7)->format('Y-m-d H:i');
         $task->updated_by = Auth::user()->id;
         $task->save();
+        /** Save responsible users if any **/
         if($request->user_id){
             Responsible::where('task_id', $task->getKey())->delete();
             foreach ($request->user_id as $user)
@@ -70,6 +72,12 @@ class TaskController extends Controller
                $resp->save();
             }
         }
+        /** Give feedback to the user **/
+        $message = [];
+        $message['title'] = 'Sikeres mentés';
+        $message['body'] = $task->name. ' feladatot mentettük.';
+        $message['buttonText'] = 'Rendben';
+        Session::put('message', $message);
         return redirect()->route('home');
     }
 }

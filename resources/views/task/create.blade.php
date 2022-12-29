@@ -4,14 +4,14 @@
     <form action="{{ route('task.store', ['task' => $model->id ?? null]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card col-md-6">
-            <div class="card-header">Új feladat rögzítése</div>
+            <div class="card-header">@if(isset($model)) {{ $model->getKey() }}. számú feladat szerkesztése @else Új feladat rögzítése @endif</div>
             <div class="card-body">
                 {!! simpleFormInput('name', 'Feladat megnevezése', $model->name ?? null) !!}
                 {!! simpleFormInput('description', 'Feladat leírása', $model->description ?? null) !!}
                 {!! html_select('priority_id', $data->priorities, $model->priority_id ?? -1, $errors, 'Prioritás') !!}
                 {!! html_select('status_id', $data->statuses, $model->status_id ?? -1, $errors, 'Státusz') !!}
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="is_multi_resp" name="is_multi_resp" @if($model->is_multi_resp) checked @endif>
+                    <input type="checkbox" class="form-check-input" id="is_multi_resp" name="is_multi_resp" @if(isset($model) && $model->is_multi_resp) checked @endif>
                     <label class="form-check-label" for="is_multi_resp">Több személy megadható felelősnek?</label>
                 </div>
                 <div class="form-group col-md-8">

@@ -42,3 +42,21 @@
 </div>
 <main-component></main-component>
 @endsection
+
+@section('script')
+    @if(Illuminate\Support\Facades\Session::get('message'))
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Swal.fire({
+                title: '{{ Session::get('message.title') }}',
+                html: '{{ Session::get('message.body') }}',
+                icon: 'success',
+                confirmButtonText: '{{ Session::get('message.buttonText') }}'
+            })
+        });
+    </script>
+    @php
+        Session::forget('message');
+    @endphp
+    @endif
+@endsection
